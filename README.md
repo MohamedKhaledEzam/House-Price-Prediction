@@ -218,7 +218,7 @@ Random Forest was selected because it achieved lower MAE/RMSE and higher R² on 
 
 ### Prediction form
 
-![Prediction form](docs/screenshots/Completed%20Prediction.png)
+![Prediction form](docs/screenshots/Completed%20Prediction%20Form%20before%20submitting.png)
 
 ### Prediction result
 

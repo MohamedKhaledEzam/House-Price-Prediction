@@ -1,0 +1,167 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #172033;
+  background: #f3f6fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page-container {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+}
+
+.card {
+  width: min(100%, 820px);
+  background: #ffffff;
+  border: 1px solid #e1e7f0;
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgb(23 32 51 / 10%);
+  padding: 36px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #2563eb;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  color: #111827;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.intro {
+  max-width: 640px;
+  margin: 14px 0 28px;
+  color: #526076;
+  line-height: 1.6;
+}
+
+.prediction-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.prediction-form label {
+  display: grid;
+  gap: 7px;
+  color: #25324a;
+  font-size: 0.93rem;
+  font-weight: 650;
+}
+
+.prediction-form input,
+.prediction-form select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #172033;
+  padding: 11px 12px;
+}
+
+.prediction-form input:focus,
+.prediction-form select:focus {
+  outline: 3px solid rgb(37 99 235 / 18%);
+  border-color: #2563eb;
+}
+
+.prediction-form button,
+.secondary-button {
+  grid-column: 1 / -1;
+  border: 0;
+  border-radius: 9px;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 12px 16px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.prediction-form button:hover,
+.secondary-button:hover {
+  background: #1d4ed8;
+}
+
+.prediction-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.error-message {
+  grid-column: 1 / -1;
+  margin: 0;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 10px 12px;
+}
+
+.result-card {
+  max-width: 580px;
+  text-align: center;
+}
+
+.predicted-price {
+  margin: 18px 0;
+  color: #1d4ed8;
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 800;
+}
+
+.result-card .intro {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.result-card .secondary-button {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 24px 18px;
+  }
+
+  .prediction-form {
+    grid-template-columns: 1fr;
+  }
+
+  .prediction-form button,
+  .secondary-button,
+  .error-message {
+    grid-column: auto;
+  }
+}

@@ -214,6 +214,16 @@ Replace the values below with the final test-set metrics from your notebook.
 
 Random Forest was selected because it achieved lower MAE/RMSE and higher R² on the held-out test set.
 
-## Screenshots
+## Demo screenshots
 
-Add screenshots of the running prediction form and result page here before publishing to GitHub.
+### Prediction form
+
+![Prediction form](docs/screenshots/Completed%20Prediction.png)
+
+### Prediction result
+
+![Prediction result](docs/screenshots/Predicted%20Price.png)
+
+### FastAPI documentation
+
+![FastAPI Swagger documentation](docs/screenshots/API%20Doc.png)

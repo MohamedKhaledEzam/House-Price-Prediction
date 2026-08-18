@@ -22,38 +22,45 @@ FastAPI backend
         |
         v
 Scikit-learn Random Forest pipeline
+        |
+        v
+Predicted house price
 ```
 
 ## Tech Stack
 
-- Python
+- Python 3.11
+- Jupyter Notebook
 - pandas and NumPy
 - scikit-learn
-- FastAPI
+- FastAPI and Uvicorn
 - pytest
 - React
 - TypeScript
 - Vite
+- Git and GitHub
 
 ## Project Structure
 
 ```text
 house-price-project/
 ├── backend/
-│   ├── app/
+│   ├── app/                         # FastAPI application
 │   ├── models/
-│   │   ├── house_price.pkl
+│   │   ├── house_price.pkl          # Generated locally; not committed to GitHub
 │   │   └── locations.json
 │   ├── tests/
 │   ├── requirements.txt
 │   └── .env.example
+├── docs/
+│   └── screenshots/
 ├── frontend/
 │   ├── src/
 │   ├── .env.example
 │   └── package.json
 ├── notebooks/
 │   ├── data/
-│   │   └── house_prices.csv
+│   │   └── house_prices.csv         # Download locally; not committed to GitHub
 │   └── house_price_model.ipynb
 └── README.md
 ```
@@ -62,13 +69,20 @@ house-price-project/
 
 This project uses the [House Price dataset by Juhi Bhojani on Kaggle](https://www.kaggle.com/datasets/juhibhojani/house-price).
 
-Download the dataset and place `house_prices.csv` in:
-
-```text
-notebooks/data/
-```
-
 The raw dataset is intentionally excluded from Git because it is large.
+
+To prepare the dataset:
+
+1. Download the dataset from Kaggle.
+2. Extract the downloaded files.
+3. Place `house_prices.csv` in:
+
+   ```text
+   notebooks/data/
+   ```
+
+4. Open `notebooks/house_price_model.ipynb`.
+5. Run all notebook cells from top to bottom.
 
 ## Model
 
@@ -86,7 +100,32 @@ The deployed pipeline expects:
 - `Ownership`
 - `facing`
 
+## Model File Notice
+
+The trained model file, `backend/models/house_price.pkl`, is intentionally excluded from this repository because it is 412.58 MB, which exceeds GitHub's 100 MB per-file size limit.
+
+To recreate the model file:
+
+1. Download the Kaggle dataset and place `house_prices.csv` in `notebooks/data/`.
+2. Open `notebooks/house_price_model.ipynb`.
+3. Run all cells from top to bottom.
+4. Copy the generated `house_price.pkl` to:
+
+   ```text
+   backend/models/house_price.pkl
+   ```
+
+5. Ensure the exported `locations.json` is available at:
+
+   ```text
+   backend/models/locations.json
+   ```
+
+After the model file is restored, the FastAPI backend can load it and serve predictions.
+
 ## Backend Setup
+
+From the project root:
 
 ```powershell
 cd backend
@@ -113,13 +152,15 @@ Open Swagger documentation at:
 http://127.0.0.1:8000/docs
 ```
 
-Run tests:
+Run backend tests:
 
 ```powershell
 pytest -q
 ```
 
 ## Frontend Setup
+
+Open a second terminal from the project root:
 
 ```powershell
 cd frontend
@@ -203,18 +244,20 @@ curl -X POST "http://127.0.0.1:8000/predict" `
   -d "{\"area_sqft\":1200,\"floor_num\":3,\"bathroom_num\":2,\"balcony_num\":1,\"location\":\"bangalore\",\"furnishing\":\"Semi-Furnished\",\"transaction\":\"New Property\",\"ownership\":\"Freehold\",\"facing\":\"East\"}"
 ```
 
+The API returns a JSON response containing the predicted property price.
+
 ## Model Metrics
 
-Replace the values below with the final test-set metrics from your notebook.
+The following metrics were calculated on the held-out test set.
 
 | Model | MAE | RMSE | R² |
 |---|---:|---:|---:|
 | Linear Regression | ₹4,580,502.41 | ₹9,317,660.52 | 0.5988 |
 | Random Forest | ₹1,051,386.87 | ₹5,928,642.03 | 0.8376 |
 
-Random Forest was selected because it achieved lower MAE/RMSE and higher R² on the held-out test set.
+Random Forest was selected for deployment because it achieved lower MAE and RMSE, plus a substantially higher R² score, than Linear Regression on the held-out test set.
 
-## Demo screenshots
+## Demo Screenshots
 
 ### Prediction form
 
@@ -227,3 +270,7 @@ Random Forest was selected because it achieved lower MAE/RMSE and higher R² on 
 ### FastAPI documentation
 
 ![FastAPI Swagger documentation](docs/screenshots/API%20Doc.png)
+
+## Author
+
+Mohamed Khaled Ezam
